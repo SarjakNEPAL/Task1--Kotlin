@@ -11,6 +11,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -66,21 +67,38 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         // Set up submit button click listener
         submit.setOnClickListener {
-            val name = nameInput.text.toString()
-            val password = passwordInput.text.toString()
-            val email = emailInput.text.toString()
-            val city = cityAuto.text.toString()
-            if (agreement.isChecked) {
-                val intent = Intent(this@MainActivity, DashboardActivity::class.java)
-                intent.putExtra("name", name)
-                intent.putExtra("email", email)
-                intent.putExtra("password", password)
-                intent.putExtra("city", city)
-                intent.putExtra("gender", gender)
-                intent.putExtra("country", selectedCountry)
-                startActivity(intent)
+            if(nameInput.text.isEmpty()){
+                nameInput.error="Cannot be empty"
             }
+            else if(passwordInput.text.isEmpty()){
+                passwordInput.error="Cannot be empty"
+            }else if(gender == ""){
+                female.error="Must be checked"
+            }else if(cityAuto.text.isEmpty()){
+                cityAuto.error="cannot be empty"
+            }else if(emailInput.text.isEmpty()){
+                emailInput.error="Cannot be empty"
+            }else{
+                val name = nameInput.text.toString()
+                val password = passwordInput.text.toString()
+                val email = emailInput.text.toString()
+                val city = cityAuto.text.toString()
+                if (agreement.isChecked) {
+                    val intent = Intent(this@MainActivity, DashboardActivity::class.java)
+                    intent.putExtra("name", name)
+                    intent.putExtra("email", email)
+                    intent.putExtra("password", password)
+                    intent.putExtra("city", city)
+                    intent.putExtra("gender", gender)
+                    intent.putExtra("country", selectedCountry)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText( this@MainActivity, "Please Accept Terms and agreement",Toast.LENGTH_SHORT).show()
+            }
+
+
         }
+            }
 
         // Handle window insets for edge-to-edge display
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
