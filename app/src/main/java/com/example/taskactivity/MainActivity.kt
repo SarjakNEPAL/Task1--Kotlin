@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var cityAuto: AutoCompleteTextView
     private lateinit var agreement: CheckBox
     private lateinit var submit: Button
-    private lateinit var gender: String
+    private var gender: String = "" // Initial value to ensure it's not uninitialized
     private lateinit var city: Array<String>
-    private lateinit var selectedCountry: String
+    private var selectedCountry: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         // Set up gender radio buttons
         male.setOnClickListener {
-            var gender = "Male"
+            gender = "Male"
         }
         female.setOnClickListener {
-            var gender = "Female"
+            gender = "Female"
         }
 
         // Set up country spinner
@@ -77,9 +77,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 intent.putExtra("password", password)
                 intent.putExtra("city", city)
                 intent.putExtra("gender", gender)
-                intent.putExtra("country",selectedCountry)
+                intent.putExtra("country", selectedCountry)
                 startActivity(intent)
-
             }
         }
 

@@ -28,6 +28,7 @@ class DashboardActivity : AppCompatActivity() {
         city=findViewById(R.id.cityOutput)
         back=findViewById(R.id.backButtonDashboard)
 
+
         fullname.text= intent.getStringExtra("name")
         email.text= intent.getStringExtra("email")
         gender.text= intent.getStringExtra("gender")
